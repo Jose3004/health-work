@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy-Work | Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h1 class="title">Crear Cuenta</h1>
+            <p class="subtitle">Únete a Healthy-Work y cuida tu bienestar</p>
+
+            <form class="login-form" method="POST" action="/registro">
+                <label for="name">Nombre completo</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="area">Área de trabajo</label>
+                <input type="text" id="area" name="area" required>
+
+                <button type="submit" class="btn">Registrarme</button>
+            </form>
+
+            <p class="register-text">
+                ¿Ya tienes cuenta?
+                <a href="{{ url_for('login') }}">Ya tengo cuenta</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

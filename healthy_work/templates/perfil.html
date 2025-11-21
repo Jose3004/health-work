@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthy-Work | Perfil</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+        <h2>Healthy-Work</h2>
+        <nav>
+            <ul>
+                
+                {# Enlace de Inicio #}
+                <li>
+                    <a href="{{ url_for('dashboard') }}" 
+                       {% if request.endpoint == 'dashboard' %}class="active"{% endif %}>
+                        <i class="fas fa-home sidebar-icon"></i>
+                        Inicio
+                    </a>
+                </li>
+                
+                {# Enlace de Perfil #}
+                <li>
+                    <a href="{{ url_for('perfil') }}" 
+                       {% if request.endpoint == 'perfil' %}class="active"{% endif %}>
+                        <i class="fas fa-user sidebar-icon"></i>
+                        Perfil
+                    </a>
+                </li>
+                
+                {# Enlace de Manejo de Emociones #}
+                <li>
+                    <a href="{{ url_for('emociones') }}" 
+                       {% if request.endpoint == 'emociones' %}class="active"{% endif %}>
+                        <i class="fas fa-brain sidebar-icon"></i>
+                        Manejo de emociones
+                    </a>
+                </li>
+                
+                {# Enlace de Recursos #}
+                <li>
+                    <a href="{{ url_for('recursos') }}" 
+                       {% if request.endpoint == 'recursos' %}class="active"{% endif %}>
+                        <i class="fas fa-book-reader sidebar-icon"></i>
+                        Recursos ansiedad/depresión
+                    </a>
+                </li>
+                
+                {# Enlace de Agenda de Citas #}
+                <li>
+                    <a href="{{ url_for('agenda') }}" 
+                       {% if request.endpoint == 'agenda' %}class="active"{% endif %}>
+                        <i class="fas fa-calendar-alt sidebar-icon"></i>
+                        Agenda de citas
+                    </a>
+                </li>
+                
+                {# Enlace de Cerrar Sesión #}
+                <li>
+                    <a href="{{ url_for('login') }}">
+                        <i class="fas fa-sign-out-alt sidebar-icon"></i>
+                        Cerrar sesión
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <header>
+        <h1>Mi Perfil</h1>
+        <p>Aquí puedes actualizar tu información personal.</p>
+      </header>
+
+      <!-- Mensajes flash -->
+      {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+          <div class="flash-container">
+            {% for categoria, msg in mensajes %}
+              <div class="flash {{ categoria }}">{{ msg }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <section class="profile-section">
+        <form method="POST" class="profile-form">
+
+          <label for="name">Nombre completo</label>
+          <input type="text" id="name" name="name"
+                 value="{{ user['nombre'] }}" required>
+
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email"
+                 value="{{ user['email'] }}" required>
+
+          <label for="area">Área de trabajo</label>
+          <input type="text" id="area" name="area"
+                 value="{{ user['area'] }}" required>
+
+          <button type="submit" class="btn">Actualizar información</button>
+
+        </form>
+      </section>
+
+    </main>
+
+  </div>
+</body>
+</html>
